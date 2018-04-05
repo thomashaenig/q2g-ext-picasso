@@ -6,7 +6,7 @@ import * as template            from "text!./q2g-ext-picassoWizardDirective.html
 import * as picassoImport       from "../node_modules/picasso.js/dist/picasso";
 import * as picassoQ            from "../node_modules/picasso-plugin-q/dist/picasso-q";
 import * as  picassoHammer      from "../node_modules/picasso-plugin-hammer/dist/picasso-hammer";
-import "../node_modules/ace-builds/src/ace";
+import "../node_modules/ace-builds/src-min/ace";
 import "css!./q2g-ext-picassoWizardDirective.css";
 //#endregion
 
@@ -74,7 +74,7 @@ class PicassoWizardController {
 
         try {
 
-            this.runEditorCode = Function("picasso", "data", "element", v);
+            this.runEditorCode = Function("picasso", "data", "element", "model", "picassoQ", v);
             this.parseError = false;
         } catch (e) {
             this.parseError = true;
@@ -192,7 +192,7 @@ class PicassoWizardController {
     private runParsedCode(): void {
         if (!this.parseError) {
             setTimeout(() => {
-                this.runEditorCode(picasso, this.picassoData, this.chartElement);
+                this.runEditorCode(picasso, this.picassoData, this.chartElement, this.model, picassoQ);
             }, timer);
         }
     }
